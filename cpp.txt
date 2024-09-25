@@ -1,0 +1,106 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <windows.h>
+
+using namespace std;
+
+void printUnderlineText(const string& text) {
+    // Print text with underline effect
+    cout << "\033[4m" << text << "\033[0m";
+}
+
+class Menu {
+public:
+    void show() {
+        cout << "\nWelcome to ZZZ menu" << endl;
+        cout << " 1. Order entry" << endl;
+        cout << " 2. Reporting" << endl;
+        cout << " 3. Exit" << endl;
+    }
+};
+
+void takeOrder(int orderNumber) {
+    string category, type;
+    int quantity;
+    char more;
+
+    cout << "Order " << orderNumber << endl;
+    cout << "Enter category: ";
+    printUnderlineText("");
+    cin >> category;
+    cout << endl << "Enter type: ";
+    printUnderlineText("");
+    cin >> type;
+    cout << endl << "Quantity: ";
+    printUnderlineText("");
+    cin >> quantity;
+    cout << endl << "Add-on? ";
+    printUnderlineText("");
+    cout << endl << ":" << endl << ":" << endl;
+    cout << "Anymore order? (Y/N): ";
+    printUnderlineText("");
+    cin >> more;
+    cout << endl;
+
+    if (more != 'Y' && more != 'y') {
+        cout << "No more orders to process." << endl;
+    }
+}
+
+int main() {
+    int choice = 0;
+    bool continueOrdering = true;
+    int orderNumber = 1;
+
+    cout << setw(60) << "XXXXX" << endl;
+    cout << setw(60) << "   X " << endl;
+    cout << setw(60) << "  X  " << endl;
+    cout << setw(60) << " X   " << endl;
+    cout << setw(60) << "X    " << endl;
+    cout << setw(60) << "XXXXX" << endl;
+
+    Menu menu;
+
+    while (true) {
+        menu.show();
+        cout << "Choice: ";
+        printUnderlineText("");
+        cin >> choice;
+        cout << endl;
+
+        switch (choice) {
+            case 1:
+                cout << "Customer 1" << setw(100) << "20 July 2024" << endl << endl;
+
+                while (continueOrdering) {
+                    takeOrder(orderNumber++);
+                    char more;
+                    cout << "Anymore orders? (Y/N): ";
+                    printUnderlineText("");
+                    cin >> more;
+                    cout << endl;
+
+                    if (more != 'Y' && more != 'y') {
+                        continueOrdering = false;
+                    }
+                }
+                continueOrdering = true; // Reset for next potential session
+                break;
+
+            case 2:
+                cout << "Reporting feature not yet implemented" << endl;
+                break;
+
+            case 3:
+                cout << "Exiting program" << endl;
+                return 0;
+
+            default:
+                cout << "Invalid choice" << endl;
+                break;
+        }
+    }
+
+    return 0;
+}
